@@ -1,0 +1,66 @@
+unit UnitLogin;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.TabControl,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects, FMX.Edit;
+
+type
+  TFormLogin = class(TForm)
+    TabControlInicio: TTabControl;
+    TabLogin: TTabItem;
+    TabCriarConta: TTabItem;
+    RectangleFundoAcessar: TRectangle;
+    ImgLogo: TImage;
+    LayoutLogin: TLayout;
+    LabelEmail: TLabel;
+    LabelSenha: TLabel;
+    Edit1: TEdit;
+    EditSenha: TEdit;
+    RectangleBtnLogin: TRectangle;
+    SpeedButtonLogin: TSpeedButton;
+    LabelCriarConta: TLabel;
+    RectangleFundoCriarConta: TRectangle;
+    ImageLogo: TImage;
+    LabelNome: TLabel;
+    LabelConfirmarEmail: TLabel;
+    LabelEmailCriarConta: TLabel;
+    LabelSenhaCriarConta: TLabel;
+    LayoutCriarConta: TLayout;
+    EditNome: TEdit;
+    EditEmailCriarConta: TEdit;
+    EditConfirmarSenha: TEdit;
+    EditSenhaCriarConta: TEdit;
+    RectangleBtnCriarConta: TRectangle;
+    SpeedButtonCriarConta: TSpeedButton;
+    LabelJaTemConta: TLabel;
+    procedure LabelCriarContaClick(Sender: TObject);
+    procedure LabelJaTemContaClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormLogin: TFormLogin;
+
+implementation
+
+{$R *.fmx}
+
+procedure TFormLogin.LabelCriarContaClick(Sender: TObject);
+begin
+      TabControlInicio.SetActiveTabWithTransition(TabCriarConta, TTabTransition.Slide);
+end;
+
+procedure TFormLogin.LabelJaTemContaClick(Sender: TObject);
+begin
+     TabControlInicio.SetActiveTabWithTransition(TabLogin, TTabTransition.Slide);
+end;
+
+
+
+end.
