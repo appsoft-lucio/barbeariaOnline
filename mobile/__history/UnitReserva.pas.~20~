@@ -1,0 +1,158 @@
+unit UnitReserva;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
+  FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListBox,
+  uLoading, FMX.TabControl, uCustomCalendar;
+
+type
+  TFormReserva = class(TForm)
+    LayoutTooBar: TLayout;
+    ImageVoltar: TImage;
+    LabelReservas: TLabel;
+    LabelHidratação: TLabel;
+    LabelEscolhaProfissional: TLabel;
+    ListBoxProfissionais: TListBox;
+    TabControlReservas: TTabControl;
+    TabItemProfissionais: TTabItem;
+    TabItemCalendar: TTabItem;
+    RectangleFundoProfissionais: TRectangle;
+    RectangleFundoCalendar: TRectangle;
+    Label1: TLabel;
+    LabelEscolhaData: TLabel;
+    ListBoxHorario: TListBox;
+    LayoutCalendar: TLayout;
+    LabelHorario: TLabel;
+    RectangleBtnReserva: TRectangle;
+    SpeedButtonReserva: TSpeedButton;
+    procedure FormShow(Sender: TObject);
+    procedure ImageVoltarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ListBoxProfissionaisItemClick(const Sender: TCustomListBox;
+      const Item: TListBoxItem);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    cal : TCustomCalendar;
+    procedure RefreshProfissionais;
+    procedure TerminateProfissionais(Sender: TObject);
+    procedure AddProfissionalListBox(id_prestador: integer; nome: string;
+      valor: double);
+    procedure DayClick(Sender: TObject);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormReserva: TFormReserva;
+
+implementation
+
+{$R *.fmx}
+
+uses UnitFrameProfissional;
+
+procedure TFormReserva.AddProfissionalListBox(id_prestador: integer;
+                                  nome: string; valor: double);
+      var
+          item : TListBoxItem;
+          frame : TFrameProfissional;
+begin
+
+    // Adicionar o item na lista
+    item := TListBoxItem.Create(ListBoxProfissionais);
+    item.Selectable := false;
+    item.Text := '';
+    item.Height := 60;
+    item.Tag := id_prestador;
+
+    // Frame do serviço
+    frame := TFrameProfissional.Create(item);
+    frame.LabelProfissional.Text := nome;
+    frame.LabelValor.Text := FormatFloat('R$ #,##0.00', valor);
+
+    item.AddObject(frame);
+
+    ListBoxProfissionais.AddObject(item);
+end;
+
+procedure TFormReserva.TerminateProfissionais(Sender: TObject);
+begin
+
+    TLoading.Hide;
+
+    if Assigned(TThread(Sender).FatalException) then
+    begin
+        showmessage(Exception(TThread(Sender).FatalException).Message);
+        exit;
+    end;
+
+    AddProfissionalListBox(1, 'Lúcio Cecílio Júnior', 50);
+    AddProfissionalListBox(2, 'Lúcio Cecílio Júnior', 35);
+    AddProfissionalListBox(3, 'Lúcio Cecílio Júnior', 50);
+    AddProfissionalListBox(4, 'Lúcio Cecílio Júnior', 120);
+    AddProfissionalListBox(5, 'Lúcio Cecílio Júnior', 99.99);
+    AddProfissionalListBox(6, 'Lúcio Cecílio Júnior', 12);
+end;
+
+procedure TFormReserva.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    Action := TCloseAction.caFree;
+    formReserva := nil;
+end;
+
+procedure TFormReserva.DayClick(Sender: TObject);
+begin
+    showmessage(FormatDateTime('dd/mm/yyyy', cal.SelectedDate));
+end;
+
+procedure TFormReserva.FormCreate(Sender: TObject);
+begin
+    //Montar calendário
+    cal := TCustomCalendar.Create(LayoutCalendar);
+    cal.OnClick := DayClick;
+
+    //Setup calendário
+
+
+    cal.ShowCalendar;
+end;
+
+procedure TFormReserva.FormDestroy(Sender: TObject);
+begin
+    cal.Free;
+end;
+
+procedure TFormReserva.FormShow(Sender: TObject);
+begin
+    RefreshProfissionais;
+end;
+
+procedure TFormReserva.ImageVoltarClick(Sender: TObject);
+begin
+    close;
+end;
+
+procedure TFormReserva.ListBoxProfissionaisItemClick(
+  const Sender: TCustomListBox; const Item: TListBoxItem);
+begin
+    TabControlReservas.GotoVisibleTab(1);
+end;
+
+procedure TFormReserva.RefreshProfissionais;
+begin
+
+     ListBoxProfissionais.Items.Clear;
+     TLoading.Show(FormReserva, 'BarberPro...');
+
+    TLoading.ExecuteThread(procedure
+    begin
+        sleep(0500);
+    end, TerminateProfissionais);
+end;
+
+end.

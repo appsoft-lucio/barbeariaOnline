@@ -619,6 +619,7 @@ object FormLogin: TFormLogin
             YRadius = 5.000000000000000000
             object SpeedButtonLogin: TSpeedButton
               Align = Client
+              Cursor = crHandPoint
               StyledSettings = [Family, FontColor]
               Size.Width = 200.000000000000000000
               Size.Height = 35.000000000000000000
@@ -627,6 +628,7 @@ object FormLogin: TFormLogin
               TextSettings.Font.Size = 14.000000000000000000
               TextSettings.Font.StyleExt = {00070000000000000004000000}
               TextSettings.Trimming = None
+              OnClick = SpeedButtonLoginClick
             end
           end
         end
@@ -655,6 +657,7 @@ object FormLogin: TFormLogin
       end
     end
     object TabCriarConta: TTabItem
+      Cursor = crHandPoint
       CustomIcon = <
         item
         end>
@@ -1321,6 +1324,7 @@ object FormLogin: TFormLogin
               TextSettings.Font.Size = 14.000000000000000000
               TextSettings.Font.StyleExt = {00070000000000000004000000}
               TextSettings.Trimming = None
+              OnClick = SpeedButtonCriarContaClick
             end
           end
         end

@@ -1,0 +1,60 @@
+object FrameProfissional: TFrameProfissional
+  HitTest = False
+  Margins.Top = 5.000000000000000000
+  Margins.Bottom = 5.000000000000000000
+  Size.Width = 300.000000000000000000
+  Size.Height = 50.000000000000000000
+  Size.PlatformDefault = False
+  object RectangleProfissional: TRectangle
+    Align = Client
+    Fill.Color = xFF191919
+    HitTest = False
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Size.Width = 290.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 5.000000000000000000
+    YRadius = 5.000000000000000000
+    ParentShowHint = False
+    ShowHint = False
+    object LabelProfissional: TLabel
+      Align = Client
+      StyledSettings = []
+      Margins.Left = 10.000000000000000000
+      Size.Width = 170.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Roboto'
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = claWhite
+      Text = 'L'#250'cio J'#250'nior'
+      TabOrder = 2
+    end
+    object LabelValor: TLabel
+      Align = Right
+      StyledSettings = []
+      Margins.Right = 10.000000000000000000
+      Position.X = 180.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Roboto'
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = xFFFE9900
+      TextSettings.HorzAlign = Trailing
+      Text = 'R$ 0,00'
+      TabOrder = 1
+    end
+    object FloatAnimation1: TFloatAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+  end
+end
