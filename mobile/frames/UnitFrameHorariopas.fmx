@@ -1,0 +1,19 @@
+object Frame1: TFrame1
+  Size.Width = 136.000000000000000000
+  Size.Height = 50.000000000000000000
+  Size.PlatformDefault = False
+  object LabelHorario: TLabel
+    Align = Client
+    StyledSettings = []
+    Size.Width = 136.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Roboto'
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claWhite
+    TextSettings.HorzAlign = Center
+    Text = '00:00'
+    TabOrder = 3
+  end
+end

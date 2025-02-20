@@ -7,7 +7,7 @@ object FrameServico: TFrameServico
   Size.PlatformDefault = False
   object Rectangle1: TRectangle
     Align = Center
-    Fill.Color = xFF191919
+    Fill.Color = xFF232323
     HitTest = False
     Size.Width = 120.000000000000000000
     Size.Height = 120.000000000000000000

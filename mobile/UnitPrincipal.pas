@@ -6,19 +6,31 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.ListBox, FMX.Controls.Presentation, FMX.StdCtrls, uLoading,
-  uFunctions;
+  uFunctions, FMX.Ani;
 
 type
   TFormPrincipal = class(TForm)
     LayoutTooBar: TLayout;
-    Image1: TImage;
+    ImageMenu: TImage;
     ImageLogo: TImage;
     LabelServicos: TLabel;
     ListBoxServicos: TListBox;
+    RectangleMenu: TRectangle;
+    ImgLogo: TImage;
+    LayoutMenu: TLayout;
+    LabelAgendamentos: TLabel;
+    LabelVersao: TLabel;
+    LabelDesconectar: TLabel;
+    LabelConfigurações: TLabel;
+    ImageFecharMenu: TImage;
     procedure ListBoxServicosItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
     procedure FormShow(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure ImageMenuClick(Sender: TObject);
+    procedure ImageFecharMenuClick(Sender: TObject);
+    procedure LabelAgendamentosClick(Sender: TObject);
+    procedure LabelConfiguraçõesClick(Sender: TObject);
     {procedure ListBoxServicosClick(Sender: TObject); }
   private
     procedure AddServicosListBox(id_servico: integer; descricao,
@@ -26,6 +38,7 @@ type
     procedure RefreshServicos;
     procedure DownloadImageListBox(lb: TListBox);
     procedure TerminateServicos(Sender: TObject);
+    procedure Menu;
 
 
     { Private declarations }
@@ -40,7 +53,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitFrameServico, UnitReserva;
+uses UnitFrameServico, UnitReserva, UnitHistoricoAgendamento, UnitConfig;
 
 procedure TFormPrincipal.DownloadImageListBox(lb : TListBox);
 
@@ -136,7 +149,54 @@ end;
 
 procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
+    RectangleMenu.Position.X := (LayoutTooBar.Width + 50) * -1;
     RefreshServicos;
+end;
+
+procedure TFormPrincipal.Menu;
+begin
+    if RectangleMenu.Position.X >= 0 then
+     TAnimator.AnimateFloat(RectangleMenu, 'Position.X',
+     (LayoutTooBar.Width + 50) * -1, 1, TAnimationType.In,
+     TInterpolationType.Circular )
+    else
+     RectangleMenu.Width := FormPrincipal.ClientWidth;
+     RectangleMenu.Height := FormPrincipal.ClientHeight;
+
+     TAnimator.AnimateFloat(RectangleMenu, 'Position.X', 0, 0.5,
+     TAnimationType.Out, TInterpolationType.Circular );
+end;
+
+procedure TFormPrincipal.ImageFecharMenuClick(Sender: TObject);
+begin
+    {Menu;}
+    TAnimator.AnimateFloat(RectangleMenu, 'Position.X',
+    -RectangleMenu.Width, 1,TAnimationType.In,
+    TInterpolationType.Circular );
+end;
+
+procedure TFormPrincipal.ImageMenuClick(Sender: TObject);
+begin
+    Menu;
+end;
+
+
+
+procedure TFormPrincipal.LabelAgendamentosClick(Sender: TObject);
+begin
+
+    if NOT Assigned(FormAgendamento) then
+    Application.CreateForm(TFormAgendamento, FormAgendamento);
+
+    FormAgendamento.Show;
+end;
+
+procedure TFormPrincipal.LabelConfiguraçõesClick(Sender: TObject);
+begin
+    if NOT Assigned(formConfg) then
+    Application.CreateForm(TformConfg, FormConfg);
+
+    FormConfg.Show;
 end;
 
 procedure TFormPrincipal.ListBoxServicosItemClick(const Sender: TCustomListBox;

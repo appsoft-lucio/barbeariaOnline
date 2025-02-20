@@ -7,7 +7,7 @@ object FrameProfissional: TFrameProfissional
   Size.PlatformDefault = False
   object RectangleProfissional: TRectangle
     Align = Client
-    Fill.Color = xFF191919
+    Fill.Color = xFF232323
     HitTest = False
     Margins.Left = 5.000000000000000000
     Margins.Top = 5.000000000000000000

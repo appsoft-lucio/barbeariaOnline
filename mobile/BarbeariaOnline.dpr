@@ -10,12 +10,18 @@ uses
   uFunctions in 'Utils\uFunctions.pas',
   UnitReserva in 'UnitReserva.pas' {FormReserva},
   UnitFrameProfissional in 'frames\UnitFrameProfissional.pas' {FrameProfissional: TFrame},
-  uCustomCalendar in 'Utils\uCustomCalendar.pas';
+  uCustomCalendar in 'Utils\uCustomCalendar.pas',
+  UnitFrameHorario in 'frames\UnitFrameHorario.pas' {FrameHorario: TFrame},
+  UnitHistoricoAgendamento in 'UnitHistoricoAgendamento.pas' {FormAgendamento},
+  UnitFrameHistoriocoAgendamento in 'frames\UnitFrameHistoriocoAgendamento.pas' {FrameHistoriocoAgendamento: TFrame},
+  UnitConfig in 'UnitConfig.pas' {FormConfg};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TFormLogin, FormLogin);
+  Application.CreateForm(TFormAgendamento, FormAgendamento);
+  Application.CreateForm(TFormConfg, FormConfg);
   Application.Run;
 end.
