@@ -10,5 +10,6 @@ object FormPrincipal: TFormPrincipal
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnShow = FormShow
   TextHeight = 15
 end
