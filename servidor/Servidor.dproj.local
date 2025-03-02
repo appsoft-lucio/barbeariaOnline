@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2025/03/02 12:15:38.169,=E:\git_hub\Unit1.pas</Transaction>
+    <Transaction>2025/03/02 12:16:19.279,E:\git_hub\barbeariaOnline\servidor\UnitPrincipal.pas=E:\git_hub\Unit1.pas</Transaction>
+    <Transaction>2025/03/02 12:16:19.279,E:\git_hub\barbeariaOnline\servidor\UnitPrincipal.dfm=E:\git_hub\Unit1.dfm</Transaction>
+    <Transaction>2025/03/02 12:16:32.619,E:\git_hub\barbeariaOnline\servidor\Servidor.dproj=E:\git_hub\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
