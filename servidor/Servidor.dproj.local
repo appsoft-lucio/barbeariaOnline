@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2025/03/02 12:15:38.169,=E:\git_hub\Unit1.pas</Transaction>
-    <Transaction>2025/03/02 12:16:19.279,E:\git_hub\barbeariaOnline\servidor\UnitPrincipal.dfm=E:\git_hub\Unit1.dfm</Transaction>
-    <Transaction>2025/03/02 12:16:19.279,E:\git_hub\barbeariaOnline\servidor\UnitPrincipal.pas=E:\git_hub\Unit1.pas</Transaction>
-    <Transaction>2025/03/02 12:16:32.619,E:\git_hub\barbeariaOnline\servidor\Servidor.dproj=E:\git_hub\Project1.dproj</Transaction>
-    <Transaction>2025/03/02 12:49:23.306,=E:\git_hub\barbeariaOnline\servidor\Unit1.pas</Transaction>
-    <Transaction>2025/03/02 12:50:18.649,E:\git_hub\barbeariaOnline\servidor\DataModuleGlobal.pas=E:\git_hub\barbeariaOnline\servidor\Unit1.pas</Transaction>
-    <Transaction>2025/03/02 12:50:18.649,E:\git_hub\barbeariaOnline\servidor\DataModuleGlobal.dfm=E:\git_hub\barbeariaOnline\servidor\Unit1.dfm</Transaction>
+	<Transactions>
+    <Transaction>2025/03/02 12:15:38.000.169,=E:\git_hub\Unit1.pas</Transaction>
+    <Transaction>2025/03/02 12:16:19.000.279,E:\git_hub\Unit1.pas=E:\git_hub\barbeariaOnline\servidor\UnitPrincipal.pas</Transaction>
+    <Transaction>2025/03/02 12:16:19.000.279,E:\git_hub\Unit1.dfm=E:\git_hub\barbeariaOnline\servidor\UnitPrincipal.dfm</Transaction>
+    <Transaction>2025/03/02 12:16:32.000.619,E:\git_hub\Project1.dproj=E:\git_hub\barbeariaOnline\servidor\Servidor.dproj</Transaction>
+    <Transaction>2025/03/02 12:49:23.000.306,=E:\git_hub\barbeariaOnline\servidor\Unit1.pas</Transaction>
+    <Transaction>2025/03/02 12:50:18.000.649,E:\git_hub\barbeariaOnline\servidor\Unit1.pas=E:\git_hub\barbeariaOnline\servidor\DataModuleGlobal.pas</Transaction>
+    <Transaction>2025/03/02 12:50:18.000.649,E:\git_hub\barbeariaOnline\servidor\Unit1.dfm=E:\git_hub\barbeariaOnline\servidor\DataModuleGlobal.dfm</Transaction>
+    <Transaction>2025/03/02 17:43:45.000.170,=E:\git_hub\barbeariaOnline\servidor\Unit1.pas</Transaction>
+    <Transaction>2025/03/02 17:45:11.000.076,E:\git_hub\barbeariaOnline\servidor\Unit1.pas=E:\git_hub\barbeariaOnline\servidor\controllers\controllersUsuarios.pas</Transaction>
   </Transactions>
 </BorlandProject>

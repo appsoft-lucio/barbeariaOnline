@@ -27,13 +27,10 @@ implementation
       Horse.CORS;
 procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
-    if not THorse.IsRunning then
-    begin
-        THorse.Use(Jhonson());
-        THorse.Use(CORS);
-        THorse.Listen(3000);
-        Writeln('Servidor rodando na porta 3000...');
-    end;
+    THorse.Use(Jhonson());
+    THorse.Use(CORS);
+
+    THorse.Listen(3000);
 end;
 
 end.
