@@ -8,21 +8,24 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, Data.DB,
-  FireDAC.Comp.Client, DataSet.Serialize.Config, DataSet.Serialize;
+  FireDAC.Comp.Client, DataSet.Serialize.Config, DataSet.Serialize,
+  System.JSON, fireDac.DApt;
 
 type
-  TDMGlobal = class(TDataModule)
-    FDConnection1: TFDConnection;
+  TDmGlobal = class(TDataModule)
+    Conn: TFDConnection;
     procedure DataModuleCreate(Sender: TObject);
   private
-    procedure CarregarConfigDBSQLite(Connection: TFDConnection);
+    procedure CarregarConfigDBSQLite(Connection: TFDConnection);    
     { Private declarations }
   public
+    function Login(email, senha: string): TJsonObject;
+    function InserirUsuario(nome, email, senha: string): TJsonObject;
     { Public declarations }
   end;
 
 var
-  DMGlobal: TDMGlobal;
+  DmGlobal: TDmGlobal;
 
 implementation
 
@@ -30,39 +33,89 @@ implementation
 
 {$R *.dfm}
 
-procedure TDMGlobal.CarregarConfigDBSQLite(Connection: TFDConnection);
+procedure TDmGlobal.CarregarConfigDBSQLite(Connection: TFDConnection);
 begin
   Connection.DriverName := 'SQLite';
 
   with Connection.Params do
   begin
     Clear;
-    Add('DriverID=SQLite');
+    Add('DriverID=SQLITE');
 
-    //Mudar para sua pasta
-    Add('Database=E:\git_hub\barbeariaOnline\servidor\dataBase\banco.db'); //Maquina Local
-
+    Add('DataBase= E:\git_hub\barbeariaOnline\servidor\dataBase\banco.db');
     Add('User_Name=');
     Add('Password=');
     Add('Port=');
     Add('Server=');
     Add('Protocol=');
-    Add('LockingMode=Normal');
-
-
-
+    Add('LockingMode=Normal')
   end;
 end;
 
-procedure TDMGlobal.DataModuleCreate(Sender: TObject);
+procedure TDmGlobal.DataModuleCreate(Sender: TObject);
 begin
 
-    TDataSetSeriaLizeConfig.GetInstance.CaseNameDefinition := cndLower;
-    TDataSetSeriaLizeConfig.GetInstance.Import.DecimalSeparator := '.';
+  TDataSetSerializeConfig.GetInstance.CaseNameDefinition := cndLower;
+  TDataSetSerializeConfig.GetInstance.Import.DecimalSeparator := '.';
 
-    CarregarConfigDBSQLite(FDConnection1);
+  CarregarConfigDBSQLite(Conn);
 
-    FDConnection1.Connected := true;
+  Conn.Connected := True;
+end;
+
+function TDmGlobal.Login(email, senha : string): TJsonObject;
+
+var
+  qry : TFDQuery;
+
+
+begin
+  qry := TFDQuery.Create(nil);
+  qry.Connection := Conn;
+
+  try
+    qry.SQL.Add('select id_usuario, nome, email');
+    qry.SQL.Add('from usuario');
+    qry.SQL.Add('where email=:email and senha=:senha');
+    qry.ParamByName('email').Value := email;
+    qry.ParamByName('senha').Value := senha;
+    qry.Active := true;
+
+    Result := qry.ToJSONObject;
+    
+  finally
+    FreeAndNil(qry)
+
+  end; 
+
+end;
+
+function TDmGlobal.InserirUsuario(nome, email, senha : string): TJsonObject;
+
+var
+  qry : TFDQuery;
+
+begin
+  qry := TFDQuery.Create(nil);
+  qry.Connection := Conn;
+
+  try
+    qry.SQL.Add('insert into usuario(nome, email, senha)');
+    qry.SQL.Add('values (:nome, :email, :senha);');    
+    qry.SQL.Add('select last_insert_rowid() as id_usuario');
+    qry.ParamByName('nome').Value := nome;
+    qry.ParamByName('email').Value := email;
+    qry.ParamByName('senha').Value := senha;
+    qry.Active := true;
+
+    Result := qry.ToJSONObject;
+    
+  finally
+
+    FreeAndNil(qry)
+
+  end; 
+
 end;
 
 end.

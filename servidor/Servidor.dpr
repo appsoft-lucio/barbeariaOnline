@@ -3,8 +3,8 @@ program Servidor;
 uses
   Vcl.Forms,
   UnitPrincipal in 'UnitPrincipal.pas' {FormPrincipal},
-  DataModuleGlobal in 'DataModuleGlobal.pas' {DMGlobal: TDataModule},
-  controllersUsuarios in 'controllers\controllersUsuarios.pas';
+  DataModuleGlobal in 'DataModuleGlobal.pas' {DmGlobal: TDataModule},
+  Controllers in 'Controllers\Controllers.pas';
 
 {$R *.res}
 

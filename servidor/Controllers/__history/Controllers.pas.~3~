@@ -1,0 +1,51 @@
+unit Controllers;
+
+interface
+
+uses
+  Horse,
+  System.SysUtils,
+  DataModuleGlobal;
+
+procedure RegistarRotas;
+procedure Login(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure InserirUsuario(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+
+implementation
+
+procedure RegistarRotas;
+begin
+  THorse.Post('/usuarios/login', Login);
+  THorse.Post('/usuarios/registro', InserirUsuario);
+end;
+
+procedure Login(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+
+var
+  Dm : TDmGlobal;
+
+begin
+
+  Dm := TDmGlobal.Create(nil);
+
+  try
+
+    try
+
+    except on ex:exception do
+
+    end;
+
+  finally
+
+    FreeAndNil(Dm);
+
+  end;
+end;
+
+procedure InserirUsuario(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+begin
+
+end;
+
+end.

@@ -1,4 +1,4 @@
-object DMGlobal: TDMGlobal
-  Height = 480
-  Width = 640
+object DmGlobal: TDmGlobal
+  Height = 318
+  Width = 269
 end

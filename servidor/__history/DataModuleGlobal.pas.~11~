@@ -1,0 +1,92 @@
+unit DataModuleGlobal;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs,
+  FireDAC.Phys.SQLiteWrapper.Stat, FireDAC.VCLUI.Wait, Data.DB,
+  FireDAC.Comp.Client, DataSet.Serialize.Config, DataSet.Serialize,
+  System.JSON, fireDac.DApt;
+
+type
+  TDmGlobal = class(TDataModule)
+    Conn: TFDConnection;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    procedure CarregarConfigDBSQLite(Connection: TFDConnection);
+    { Private declarations }
+  public
+    function Login(email, senha: string): TJsonObject;
+    { Public declarations }
+  end;
+
+var
+  DmGlobal: TDmGlobal;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TDmGlobal.CarregarConfigDBSQLite(Connection: TFDConnection);
+begin
+  Connection.DriverName := 'SQLite';
+
+  with Connection.Params do
+  begin
+    Clear;
+    Add('DriverID=SQLITE');
+
+    Add('DataBase= E:\git_hub\barbeariaOnline\servidor\dataBase\banco.db');
+    Add('User_Name=');
+    Add('Password=');
+    Add('Port=');
+    Add('Server=');
+    Add('Protocol=');
+    Add('LockingMode=Normal')
+  end;
+end;
+
+procedure TDmGlobal.DataModuleCreate(Sender: TObject);
+begin
+
+  TDataSetSerializeConfig.GetInstance.CaseNameDefinition := cndLower;
+  TDataSetSerializeConfig.GetInstance.Import.DecimalSeparator := '.';
+
+  CarregarConfigDBSQLite(Conn);
+
+  Conn.Connected := True;
+end;
+
+function TDmGlobal.Login(email, senha : string): TJsonObject;
+
+var
+  qry : TFDQuery;
+
+
+begin
+  qry := TFDQuery.Create(nil);
+  qry.Connection := Conn;
+
+  try
+    qry.SQL.Add('select id_usuario, nome, email');
+    qry.SQL.Add('from usuario');
+    qry.SQL.Add('where email=:email, senha=:senha');
+    qry.ParamByName('email').Value := email;
+    qry.ParamByName('senha').Value := senha;
+    qry.Active := true;
+
+    Result := qry.ToJSONObject;
+    
+  finally
+
+  end;
+
+
+end;
+
+end.

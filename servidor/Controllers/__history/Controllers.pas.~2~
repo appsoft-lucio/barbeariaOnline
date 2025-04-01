@@ -1,0 +1,31 @@
+unit Controllers;
+
+interface
+
+uses
+  Horse,
+  System.SysUtils,
+  DataModuleGlobal;
+
+procedure RegistarRotas;
+procedure Login(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure InserirUsuario(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+
+implementation
+
+procedure RegistarRotas;
+begin
+
+end;
+
+procedure Login(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+begin
+
+end;
+
+procedure InserirUsuario(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+begin
+
+end;
+
+end.
